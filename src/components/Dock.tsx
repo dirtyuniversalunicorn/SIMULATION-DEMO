@@ -1,13 +1,14 @@
 import { Dock } from "react-dock";
 import { useDockContext } from "../provider/DockProvider";
-import { Button } from "@chakra-ui/react";
+import { UnitDetails } from "./UnitDetails";
+import { Log } from "./Log";
+import { DockGrid } from "./DockGrid";
+import { DockingControls } from "./DockingControls";
+import { CloseButton } from "./CloseButton";
 
 export const Docking = () => {
-    const {
-        visibility: dockVisibility,
-        position: dockPosition,
-        handleVisibility,
-    } = useDockContext();
+    const { visibility: dockVisibility, position: dockPosition } =
+        useDockContext();
     return (
         <Dock
             position={dockPosition}
@@ -15,15 +16,12 @@ export const Docking = () => {
             dockStyle={{ backgroundColor: "black" }}
             dimMode="none"
         >
-            Content of the dock
-            <Button
-                position="absolute"
-                right={0}
-                top={0}
-                onClick={() => handleVisibility()}
-            >
-                X
-            </Button>
+            <DockingControls />
+            <DockGrid>
+                <UnitDetails />
+                <Log />
+            </DockGrid>
+            <CloseButton />
         </Dock>
     );
 };
