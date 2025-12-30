@@ -4,6 +4,7 @@ import { Map } from "./components/Map";
 import { Header } from "./components/Header";
 import { Docking } from "./components/Dock";
 import DockProvider from "./provider/DockProvider";
+import "leaflet/dist/leaflet.css";
 
 function App() {
     return (
