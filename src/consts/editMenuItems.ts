@@ -1,0 +1,1 @@
+export const editMenuItems = ['Undo', 'Redo', 'Cut', 'Copy', 'Paste', 'Delete', 'Select All'];
