@@ -1,0 +1,1 @@
+export const fileMenuItems = ['New File', 'Open File', 'Save', 'Save As', 'Close'];

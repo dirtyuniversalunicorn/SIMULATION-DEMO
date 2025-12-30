@@ -1,0 +1,1 @@
+export const viewMenuItems = ['Zoom In', 'Zoom Out', 'Reset Zoom', 'Full Screen', 'Split View'];
