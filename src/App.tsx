@@ -1,7 +1,8 @@
 import "./App.css";
+import { Map } from "./components/Map";
 
 function App() {
-    return <h1>Hello World!</h1>;
+    return <Map />;
 }
 
 export default App;
