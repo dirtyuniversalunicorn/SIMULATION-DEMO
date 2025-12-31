@@ -2,7 +2,7 @@ import { Marker } from "react-leaflet";
 import { icons } from "../../consts/icons";
 import type React from "react";
 import { useDockContext } from "../../provider/DockProvider";
-import { useUnitSocketContext } from "../../provider/UnitSocketProvider";
+import { useSocketContext } from "../../provider/SocketProvider";
 import type { Unit } from "../../types/Unit";
 
 type UnitMarkerProps = {
@@ -12,7 +12,7 @@ type UnitMarkerProps = {
 
 export const UnitMarker = ({ children, unit }: UnitMarkerProps) => {
     const { visibility, handleVisibility } = useDockContext();
-    const { setSelectedUnit } = useUnitSocketContext();
+    const { setSelectedUnit } = useSocketContext();
 
     return (
         <Marker

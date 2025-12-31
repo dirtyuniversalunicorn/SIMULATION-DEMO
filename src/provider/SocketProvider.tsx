@@ -10,7 +10,7 @@ import {
 import type { Unit } from "../types/Unit";
 import { socket } from "../socket";
 
-type UnitsContextValue = {
+type SocketContextValue = {
     units: Unit[];
     isConnected: boolean;
     selectedUnit: string;
@@ -20,9 +20,9 @@ type UnitsContextValue = {
     reset: () => void;
 };
 
-const UnitsContext = createContext<UnitsContextValue | null>(null);
+const SocketContext = createContext<SocketContextValue | null>(null);
 
-export function UnitsProvider({ children }: { children: ReactNode }) {
+export function SocketProvider({ children }: { children: ReactNode }) {
     const [units, setUnits] = useState<Unit[]>([]);
     const [isConnected, setIsConnected] = useState(false);
     const [selectedUnit, setSelectedUnit] = useState("");
@@ -62,7 +62,7 @@ export function UnitsProvider({ children }: { children: ReactNode }) {
     const reset = () => socket.emit("simulation:reset");
 
     return (
-        <UnitsContext.Provider
+        <SocketContext.Provider
             value={{
                 units,
                 isConnected,
@@ -74,18 +74,18 @@ export function UnitsProvider({ children }: { children: ReactNode }) {
             }}
         >
             {children}
-        </UnitsContext.Provider>
+        </SocketContext.Provider>
     );
 }
 
-export function useUnitSocketContext() {
-    const unitsContext = useContext(UnitsContext);
+export function useSocketContext() {
+    const socketContext = useContext(SocketContext);
 
-    if (!unitsContext) {
+    if (!socketContext) {
         throw new Error(
-            "useUnitSocketContext must be used within the UnitsContext provider"
+            "useSocketContext must be used within the SocketContext provider"
         );
     }
 
-    return unitsContext;
+    return socketContext;
 }

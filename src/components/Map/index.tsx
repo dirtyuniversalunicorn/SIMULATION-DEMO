@@ -1,11 +1,11 @@
 import { Popup } from "react-leaflet";
-import { useUnitSocketContext } from "../../provider/UnitSocketProvider";
 import { MapWrapper } from "./MapWrapper";
 import { UnitMarker } from "./UnitMarker";
 import { UnitPath } from "./UnitPath";
+import { useSocketContext } from "../../provider/SocketProvider";
 
 export const Map = () => {
-    const { units, selectedUnit } = useUnitSocketContext();
+    const { units, selectedUnit } = useSocketContext();
 
     const selectedUnitData = units.find((u) => u.id === selectedUnit);
     return (

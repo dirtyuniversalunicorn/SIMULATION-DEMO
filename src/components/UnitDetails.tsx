@@ -1,8 +1,8 @@
 import { Box, Text } from "@chakra-ui/react";
-import { useUnitSocketContext } from "../provider/UnitSocketProvider";
+import { useSocketContext } from "../provider/SocketProvider";
 
 export const UnitDetails = () => {
-    const { units, selectedUnit } = useUnitSocketContext();
+    const { units, selectedUnit } = useSocketContext();
 
     const unitToDisplay = units.find((unit) => unit.id === selectedUnit);
 
