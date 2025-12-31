@@ -15,6 +15,9 @@ type UnitsContextValue = {
     isConnected: boolean;
     selectedUnit: string;
     setSelectedUnit: Dispatch<SetStateAction<string>>;
+    play: () => void;
+    stop: () => void;
+    reset: () => void;
 };
 
 const UnitsContext = createContext<UnitsContextValue | null>(null);
@@ -54,9 +57,21 @@ export function UnitsProvider({ children }: { children: ReactNode }) {
         };
     }, []);
 
+    const play = () => socket.emit("simulation:play");
+    const stop = () => socket.emit("simulation:stop");
+    const reset = () => socket.emit("simulation:reset");
+
     return (
         <UnitsContext.Provider
-            value={{ units, isConnected, setSelectedUnit, selectedUnit }}
+            value={{
+                units,
+                isConnected,
+                setSelectedUnit,
+                selectedUnit,
+                play,
+                stop,
+                reset,
+            }}
         >
             {children}
         </UnitsContext.Provider>
