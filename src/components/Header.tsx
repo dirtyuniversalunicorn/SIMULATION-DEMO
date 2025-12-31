@@ -15,6 +15,10 @@ export const Header = () => {
             <Button onClick={handleVisibility} ml="10px">
                 Toggle
             </Button>
+            <Button ml="10px">Play</Button>
+            <Button ml="10px">Pause</Button>
+            <Button ml="10px">Skip</Button>
+            <Button ml="10px">Stop</Button>
         </Box>
     );
 };
