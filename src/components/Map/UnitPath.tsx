@@ -1,10 +1,25 @@
 import { Polyline } from "react-leaflet";
 
 type UnitPathProps = {
-    position: [number, number];
-    destination: [number, number];
+  positionLat: number;
+  positionLng: number;
+  destLat: number;
+  destLng: number;
 };
 
-export const UnitPath = ({ position, destination }: UnitPathProps) => {
-    return <Polyline positions={[position, destination]} color="red" />;
+export const UnitPath = ({
+  positionLat,
+  positionLng,
+  destLat,
+  destLng,
+}: UnitPathProps) => {
+  return (
+    <Polyline
+      positions={[
+        [positionLat, positionLng],
+        [destLat, destLng],
+      ]}
+      color="red"
+    />
+  );
 };

@@ -4,35 +4,36 @@ import { useDockContext } from "../../provider/DockProvider";
 import type { Unit } from "../../types/Unit";
 
 type UnitMarkerProps = {
-    unit: Unit;
-    isSelected: boolean;
-    onSelect: (id: string) => void;
+  unit: Unit;
+  isSelected: boolean;
+  onSelect: (id: string) => void;
 };
 
 export const UnitMarker = ({ unit, isSelected, onSelect }: UnitMarkerProps) => {
-    const { visibility, handleVisibility } = useDockContext();
+  const { visibility, handleVisibility } = useDockContext();
 
-    const handleClick = () => {
-        if (!visibility) {
-            handleVisibility();
-        }
-        onSelect(unit.id);
-    };
+  const handleClick = () => {
+    if (!visibility) {
+      handleVisibility();
+    }
+    onSelect(unit.id);
+  };
 
-    return (
-        <Marker
-            position={unit.position}
-            icon={icons[unit.team as keyof typeof icons]}
-            eventHandlers={{ click: handleClick }}
-        >
-            {isSelected && unit.destination && (
-                <Polyline
-                    positions={[unit.position, unit.destination]}
-                    color="red"
-                />
-            )}
+  const position: [number, number] = [unit.positionLat, unit.positionLng];
 
-            <Popup>{unit.callsign}</Popup>
-        </Marker>
-    );
+  const destination: [number, number] = [unit.destLat, unit.destLng];
+
+  return (
+    <Marker
+      position={position}
+      icon={icons[unit.team]}
+      eventHandlers={{ click: handleClick }}
+    >
+      {isSelected && (
+        <Polyline positions={[position, destination]} color="red" />
+      )}
+
+      <Popup>{unit.callsign}</Popup>
+    </Marker>
+  );
 };

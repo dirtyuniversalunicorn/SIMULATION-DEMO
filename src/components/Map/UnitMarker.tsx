@@ -6,29 +6,29 @@ import { useSocketContext } from "../../provider/SocketProvider";
 import type { Unit } from "../../types/Unit";
 
 type UnitMarkerProps = {
-    children: React.ReactNode;
-    unit: Unit;
+  children: React.ReactNode;
+  unit: Unit;
 };
 
 export const UnitMarker = ({ children, unit }: UnitMarkerProps) => {
-    const { visibility, handleVisibility } = useDockContext();
-    const { setSelectedUnit } = useSocketContext();
+  const { visibility, handleVisibility } = useDockContext();
+  const { setSelectedUnit } = useSocketContext();
 
-    return (
-        <Marker
-            key={unit.id}
-            position={unit.position as [number, number]}
-            icon={icons[unit.team as keyof typeof icons]}
-            eventHandlers={{
-                click: () => {
-                    if (!visibility) {
-                        handleVisibility();
-                    }
-                    setSelectedUnit(unit.id);
-                },
-            }}
-        >
-            {children}
-        </Marker>
-    );
+  return (
+    <Marker
+      key={unit.id}
+      position={[unit.positionLat, unit.positionLng]}
+      icon={icons[unit.team as keyof typeof icons]}
+      eventHandlers={{
+        click: () => {
+          if (!visibility) {
+            handleVisibility();
+          }
+          setSelectedUnit(unit.id);
+        },
+      }}
+    >
+      {children}
+    </Marker>
+  );
 };

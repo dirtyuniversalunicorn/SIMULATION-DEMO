@@ -5,9 +5,11 @@ export type Unit = {
   time: string;
   type: string;
   callsign: string;
-  position: [number, number];
+  positionLat: number;
+  positionLng: number;
   task: string;
   team: Team;
   speed: number;
-  destination: [number, number];
+  destLat: number;
+  destLng: number;
 };
