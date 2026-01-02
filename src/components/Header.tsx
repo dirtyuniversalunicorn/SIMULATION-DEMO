@@ -9,11 +9,13 @@ import { FaPlayCircle, FaPauseCircle } from "react-icons/fa";
 import { RiResetLeftLine } from "react-icons/ri";
 import { Timer } from "./Timer";
 import { useState } from "react";
+import { TbRulerMeasure } from "react-icons/tb";
 
 export const Header = () => {
   const { visibility, handleVisibility } = useDockContext();
   const { play, stop, reset } = useSocketContext();
   const [state, setState] = useState(false);
+  const { toggleMeasureMode, measureMode } = useDockContext();
 
   return (
     <Flex as="header" height="5vh" alignItems="center">
@@ -22,7 +24,7 @@ export const Header = () => {
       <Menu category="View" items={viewMenuItems} />
       <Flex gap={2}>
         <Button onClick={handleVisibility} ml="10px">
-          Toggle
+          Info
         </Button>
         {!state ? (
           <Button
@@ -55,6 +57,10 @@ export const Header = () => {
           <RiResetLeftLine />
         </Button>
         <Timer />
+        <Button onClick={toggleMeasureMode}>
+          {measureMode ? "Exit Measure Mode" : "Measure Distance"}{" "}
+          <TbRulerMeasure />
+        </Button>
       </Flex>
     </Flex>
   );
