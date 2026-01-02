@@ -9,18 +9,18 @@ import "leaflet/dist/leaflet.css";
 import { Map } from "./components/Map";
 
 function App() {
-    console.log("Whole app being reloaded!");
-    return (
-        <Box as="section" height="100vh">
-            <SocketProvider>
-                <DockProvider>
-                    <Header />
-                    <Docking />
-                    <Map />
-                </DockProvider>
-            </SocketProvider>
-        </Box>
-    );
+  console.log("Whole app being reloaded!");
+  return (
+    <Box as="section" height="100vh">
+      <SocketProvider>
+        <DockProvider>
+          <Header />
+          <Docking />
+          <Map />
+        </DockProvider>
+      </SocketProvider>
+    </Box>
+  );
 }
 
 export default App;

@@ -11,7 +11,8 @@ type UnitMarkerProps = {
 };
 
 export const UnitMarker = ({ children, unit }: UnitMarkerProps) => {
-  const { visibility, handleVisibility } = useDockContext();
+  const { visibility, handleVisibility, measureMode, addMeasurePoint } =
+    useDockContext();
   const { setSelectedUnit } = useSocketContext();
 
   return (
@@ -21,6 +22,10 @@ export const UnitMarker = ({ children, unit }: UnitMarkerProps) => {
       icon={icons[unit.team as keyof typeof icons]}
       eventHandlers={{
         click: () => {
+          if (measureMode) {
+            addMeasurePoint(unit.positionLat, unit.positionLng);
+            return;
+          }
           if (!visibility) {
             handleVisibility();
           }
