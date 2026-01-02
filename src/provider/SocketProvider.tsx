@@ -18,6 +18,7 @@ type SocketContextValue = {
   play: () => void;
   stop: () => void;
   reset: () => void;
+  timer: number;
 };
 
 const SocketContext = createContext<SocketContextValue | null>(null);
@@ -26,6 +27,7 @@ export function SocketProvider({ children }: { children: ReactNode }) {
   const [units, setUnits] = useState<Unit[]>([]);
   const [isConnected, setIsConnected] = useState(false);
   const [selectedUnit, setSelectedUnit] = useState("");
+  const [timer, setTimer] = useState(0);
 
   console.log("units", units);
 
@@ -41,7 +43,14 @@ export function SocketProvider({ children }: { children: ReactNode }) {
       setUnits(data);
     });
 
-    // Updated for new Unit type
+    socket.on(
+      "simulation:update",
+      ({ timer, units }: { timer: number; units: Unit[] }) => {
+        setTimer(timer); // update timer
+        // setUnits(units);      // optional: update units too
+      }
+    );
+
     socket.on(
       "unit:move",
       ({
@@ -84,6 +93,7 @@ export function SocketProvider({ children }: { children: ReactNode }) {
         play,
         stop,
         reset,
+        timer,
       }}
     >
       {children}
