@@ -1,3 +1,4 @@
+import { Text } from "@chakra-ui/react";
 import { useSocketContext } from "../provider/SocketProvider";
 
 export function Timer() {
@@ -7,11 +8,9 @@ export function Timer() {
   const seconds = timer % 60;
 
   return (
-    <div>
-      <h2>
-        Simulation Timer: {minutes.toString().padStart(2, "0")}:
-        {seconds.toString().padStart(2, "0")}
-      </h2>
-    </div>
+    <Text as="h2" fontSize="2xl">
+      Timer: {minutes.toString().padStart(2, "0")}:
+      {seconds.toString().padStart(2, "0")}
+    </Text>
   );
 }

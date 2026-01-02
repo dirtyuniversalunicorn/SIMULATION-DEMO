@@ -1,4 +1,4 @@
-import { Box, Button } from "@chakra-ui/react";
+import { Flex, Button } from "@chakra-ui/react";
 import { Menu } from "./Menu";
 import { fileMenuItems } from "../consts/fileMenuItems";
 import { editMenuItems } from "../consts/editMenuItems";
@@ -7,46 +7,55 @@ import { useDockContext } from "../provider/DockProvider";
 import { useSocketContext } from "../provider/SocketProvider";
 import { FaPlayCircle, FaPauseCircle } from "react-icons/fa";
 import { RiResetLeftLine } from "react-icons/ri";
+import { Timer } from "./Timer";
+import { useState } from "react";
 
 export const Header = () => {
   const { visibility, handleVisibility } = useDockContext();
   const { play, stop, reset } = useSocketContext();
+  const [state, setState] = useState(false);
 
   return (
-    <Box as="header" height="5vh">
+    <Flex as="header" height="5vh" alignItems="center">
       <Menu category="File" items={fileMenuItems} />
       <Menu category="Edit" items={editMenuItems} />
       <Menu category="View" items={viewMenuItems} />
-      <Button onClick={handleVisibility} ml="10px">
-        Toggle
-      </Button>
-      <Button
-        ml="10px"
-        onClick={() => {
-          play();
-          !visibility && handleVisibility();
-        }}
-      >
-        <FaPlayCircle />
-      </Button>
-      <Button
-        ml="10px"
-        onClick={() => {
-          stop();
-          !visibility && handleVisibility();
-        }}
-      >
-        <FaPauseCircle />
-      </Button>
-      <Button
-        ml="10px"
-        onClick={() => {
-          reset();
-          !visibility && handleVisibility();
-        }}
-      >
-        <RiResetLeftLine />
-      </Button>
-    </Box>
+      <Flex gap={2}>
+        <Button onClick={handleVisibility} ml="10px">
+          Toggle
+        </Button>
+        {!state ? (
+          <Button
+            onClick={() => {
+              play();
+              !visibility && handleVisibility();
+              setState(true);
+            }}
+          >
+            <FaPlayCircle />
+          </Button>
+        ) : (
+          <Button
+            onClick={() => {
+              stop();
+              !visibility && handleVisibility();
+              setState(false);
+            }}
+          >
+            <FaPauseCircle />
+          </Button>
+        )}
+        <Button
+          onClick={() => {
+            reset();
+            !visibility && handleVisibility();
+            setState(false);
+          }}
+        >
+          <RiResetLeftLine />
+        </Button>
+        <Timer />
+      </Flex>
+    </Flex>
   );
 };

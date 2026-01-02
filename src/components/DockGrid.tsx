@@ -2,21 +2,22 @@ import { Grid } from "@chakra-ui/react";
 import { useDockContext } from "../provider/DockProvider";
 
 type DockGridProps = {
-    children: React.ReactNode;
+  children: React.ReactNode;
 };
 
 export const DockGrid = ({ children }: DockGridProps) => {
-    const { position } = useDockContext();
+  const { position } = useDockContext();
 
-    if (position === "left" || position === "right") {
-        return (
-            <Grid gridTemplateRows={{ base: "repeat(2, 1fr)" }}>
-                {children}
-            </Grid>
-        );
-    }
+  const isVertical = position === "left" || position === "right";
 
-    return (
-        <Grid gridTemplateColumns={{ base: "repeat(2, 1fr)" }}>{children}</Grid>
-    );
+  return (
+    <Grid
+      h="95vh"
+      overflow="hidden"
+      gridTemplateRows={isVertical ? "repeat(2, 1fr)" : undefined}
+      gridTemplateColumns={!isVertical ? "repeat(2, 1fr)" : undefined}
+    >
+      {children}
+    </Grid>
+  );
 };

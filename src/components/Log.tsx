@@ -1,15 +1,20 @@
 import { Box, Text } from "@chakra-ui/react";
-import { Timer } from "./TImer";
+import { Timer } from "./Timer";
+import { useSocketContext } from "../provider/SocketProvider";
 
 export const Log = () => {
+  const { logs } = useSocketContext();
   return (
-    <Box as="div" padding="10px">
-      <Text as="h3">Log Component</Text>
+    <Box as="div" padding="10px" overflow="auto">
       <Timer />
-      <Text>00:00:00 | Start of simulation</Text>
-      <Text>00:00:01 | Unit A1 moved to position (10, 20)</Text>
-      <Text>00:00:10 | Unit A1 moved to position (15, 25)</Text>
-      <Text>00:00:20 | Unit A1 was destroyed</Text>
+      {[...logs].reverse().map((log, index) => (
+        <Box key={`${log.type}-${index}`} _first={{ fontWeight: "bold" }}>
+          {/* <Text>Type: {log.type}</Text> */}
+          <Text>
+            {log.timestamp} | {log.message}
+          </Text>
+        </Box>
+      ))}
     </Box>
   );
 };

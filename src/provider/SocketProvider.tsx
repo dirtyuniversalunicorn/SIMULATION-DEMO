@@ -10,6 +10,12 @@ import {
 import type { Unit } from "../types/Unit";
 import { socket } from "../socket";
 
+type SimulationLog = {
+  type: "play" | "stop" | "reset";
+  message: string;
+  timestamp: string;
+};
+
 type SocketContextValue = {
   units: Unit[];
   isConnected: boolean;
@@ -19,6 +25,7 @@ type SocketContextValue = {
   stop: () => void;
   reset: () => void;
   timer: number;
+  logs: SimulationLog[];
 };
 
 const SocketContext = createContext<SocketContextValue | null>(null);
@@ -28,6 +35,7 @@ export function SocketProvider({ children }: { children: ReactNode }) {
   const [isConnected, setIsConnected] = useState(false);
   const [selectedUnit, setSelectedUnit] = useState("");
   const [timer, setTimer] = useState(0);
+  const [logs, setLogs] = useState<SimulationLog[]>([]);
 
   console.log("units", units);
 
@@ -43,13 +51,16 @@ export function SocketProvider({ children }: { children: ReactNode }) {
       setUnits(data);
     });
 
-    socket.on(
-      "simulation:update",
-      ({ timer, units }: { timer: number; units: Unit[] }) => {
-        setTimer(timer); // update timer
-        // setUnits(units);      // optional: update units too
+    socket.on("simulation:update", ({ timer }: { timer: number }) => {
+      setTimer(timer);
+    });
+
+    socket.on("simulation:status", (log: SimulationLog) => {
+      if (log.type === "reset") {
+        setLogs([]);
       }
-    );
+      setLogs((prev) => [...prev, log]);
+    });
 
     socket.on(
       "unit:move",
@@ -76,6 +87,7 @@ export function SocketProvider({ children }: { children: ReactNode }) {
       socket.off("units:init");
       socket.off("units:update");
       socket.off("unit:move");
+      socket.off("simulation:status");
     };
   }, []);
 
@@ -94,6 +106,7 @@ export function SocketProvider({ children }: { children: ReactNode }) {
         stop,
         reset,
         timer,
+        logs,
       }}
     >
       {children}
