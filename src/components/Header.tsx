@@ -10,10 +10,11 @@ import { RiResetLeftLine } from "react-icons/ri";
 import { Timer } from "./Timer";
 import { useState } from "react";
 import { TbRulerMeasure } from "react-icons/tb";
+import { SocketStatus } from "./SocketStatus";
 
 export const Header = () => {
   const { visibility, handleVisibility } = useDockContext();
-  const { play, stop, reset } = useSocketContext();
+  const { play, stop, reset, reloadUnits } = useSocketContext();
   const [state, setState] = useState(false);
   const { toggleMeasureMode, measureMode } = useDockContext();
 
@@ -29,6 +30,7 @@ export const Header = () => {
         {!state ? (
           <Button
             onClick={() => {
+              reloadUnits();
               play();
               !visibility && handleVisibility();
               setState(true);
@@ -62,6 +64,7 @@ export const Header = () => {
           <TbRulerMeasure />
         </Button>
       </Flex>
+      <SocketStatus />
     </Flex>
   );
 };

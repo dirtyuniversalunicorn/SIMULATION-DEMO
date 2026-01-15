@@ -7,16 +7,22 @@ import "leaflet/dist/leaflet.css";
 import { SocketProvider } from "./provider/SocketProvider";
 import "leaflet/dist/leaflet.css";
 import { Map } from "./components/Map";
+import { useSocketStatus } from "./hooks/useSocketStatus";
+import { Loading } from "./components/Loading";
 
 function App() {
   console.log("Whole app being reloaded!");
+  const status = useSocketStatus();
   return (
     <Box as="section" height="100vh">
       <SocketProvider>
         <DockProvider>
           <Header />
           <Docking />
-          <Map />
+          <Box>
+            <Map />
+            {status !== "connected" && <Loading />}
+          </Box>
         </DockProvider>
       </SocketProvider>
     </Box>

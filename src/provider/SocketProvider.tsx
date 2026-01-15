@@ -3,30 +3,11 @@ import {
   useContext,
   useEffect,
   useState,
-  type Dispatch,
   type ReactNode,
-  type SetStateAction,
 } from "react";
 import type { Unit } from "../types/Unit";
 import { socket } from "../socket";
-
-type SimulationLog = {
-  type: "play" | "stop" | "reset";
-  message: string;
-  timestamp: string;
-};
-
-type SocketContextValue = {
-  units: Unit[];
-  isConnected: boolean;
-  selectedUnit: string;
-  setSelectedUnit: Dispatch<SetStateAction<string>>;
-  play: () => void;
-  stop: () => void;
-  reset: () => void;
-  timer: number;
-  logs: SimulationLog[];
-};
+import type { SimulationLog, SocketContextValue } from "../types/SocketContext";
 
 const SocketContext = createContext<SocketContextValue | null>(null);
 
@@ -36,8 +17,6 @@ export function SocketProvider({ children }: { children: ReactNode }) {
   const [selectedUnit, setSelectedUnit] = useState("");
   const [timer, setTimer] = useState(0);
   const [logs, setLogs] = useState<SimulationLog[]>([]);
-
-  console.log("units", units);
 
   useEffect(() => {
     socket.on("connect", () => setIsConnected(true));
@@ -94,6 +73,7 @@ export function SocketProvider({ children }: { children: ReactNode }) {
   const play = () => socket.emit("simulation:play");
   const stop = () => socket.emit("simulation:stop");
   const reset = () => socket.emit("simulation:reset");
+  const reloadUnits = () => socket.emit("units:reload");
 
   return (
     <SocketContext.Provider
@@ -107,6 +87,7 @@ export function SocketProvider({ children }: { children: ReactNode }) {
         reset,
         timer,
         logs,
+        reloadUnits,
       }}
     >
       {children}

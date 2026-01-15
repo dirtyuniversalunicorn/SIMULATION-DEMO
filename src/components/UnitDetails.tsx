@@ -6,11 +6,14 @@ export const UnitDetails = () => {
 
   const unitToDisplay = units.find((unit) => unit.id === selectedUnit);
 
-  if (!unitToDisplay) return <Text>Select a unit to see details.</Text>;
+  if (!unitToDisplay)
+    return <Text padding="10px">Select a unit to see details.</Text>;
 
   return (
     <Box as="div" padding="10px">
-      <Text as="h3">Unit Details Component</Text>
+      <Text as="h3" fontSize="2xl" fontWeight="semibold" letterSpacing={1.61}>
+        DETAILS
+      </Text>
       <Text>Type: {unitToDisplay.type}</Text>
       <Text>Callsign: {unitToDisplay.callsign}</Text>
       <Text>

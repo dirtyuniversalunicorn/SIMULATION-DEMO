@@ -8,7 +8,7 @@ export function Timer() {
   const seconds = timer % 60;
 
   return (
-    <Text as="h2" fontSize="2xl">
+    <Text as="h3" fontSize="2xl">
       Timer: {minutes.toString().padStart(2, "0")}:
       {seconds.toString().padStart(2, "0")}
     </Text>

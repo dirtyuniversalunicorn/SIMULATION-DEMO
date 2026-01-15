@@ -12,7 +12,7 @@ export const DockGrid = ({ children }: DockGridProps) => {
 
   return (
     <Grid
-      h="95vh"
+      height={isVertical ? "95vh" : "auto"}
       overflow="hidden"
       gridTemplateRows={isVertical ? "repeat(2, 1fr)" : undefined}
       gridTemplateColumns={!isVertical ? "repeat(2, 1fr)" : undefined}

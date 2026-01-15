@@ -8,8 +8,11 @@ export const Log = () => {
     <Box as="div" padding="10px" overflow="auto">
       <Timer />
       {[...logs].reverse().map((log, index) => (
-        <Box key={`${log.type}-${index}`} _first={{ fontWeight: "bold" }}>
-          {/* <Text>Type: {log.type}</Text> */}
+        <Box
+          key={`${log.type}-${index}`}
+          color="gray"
+          _first={{ fontWeight: "bold", fontSize: "xl", color: "white" }}
+        >
           <Text>
             {log.timestamp} | {log.message}
           </Text>
