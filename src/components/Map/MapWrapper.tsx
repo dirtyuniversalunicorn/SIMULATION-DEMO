@@ -1,10 +1,7 @@
 import { MapContainer, TileLayer } from "react-leaflet";
+import type { MapWrapperProps } from "../../types/MapWrapperProps";
 
-type MapWrapper = {
-  children: React.ReactNode;
-};
-
-export const MapWrapper = ({ children }: MapWrapper) => {
+export const MapWrapper = ({ children }: MapWrapperProps) => {
   return (
     <MapContainer
       center={[49.5939, 17.2508]}

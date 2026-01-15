@@ -1,11 +1,5 @@
 import { Polyline } from "react-leaflet";
-
-type UnitPathProps = {
-  positionLat: number;
-  positionLng: number;
-  destLat: number;
-  destLng: number;
-};
+import type { UnitPathProps } from "../../types/UnitPathProps";
 
 export const UnitPath = ({
   positionLat,

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { socket } from "../socket";
-
-type ConnectionStatus = "connected" | "disconnected" | "connecting" | "error";
+import type { ConnectionStatus } from "../types/ConnectionStatus";
 
 export function useSocketStatus() {
   const [status, setStatus] = useState<ConnectionStatus>("connecting");
