@@ -12,7 +12,7 @@ Please, follow the steps below to run the application locally.
 2. Install all dependencies:
    ```bash
    npm install
-3. Frontend application does not have any environmental variables.
+3. Frontend application **does not have** any environmental variables.
    
 4. Run the development server
    ```bash
