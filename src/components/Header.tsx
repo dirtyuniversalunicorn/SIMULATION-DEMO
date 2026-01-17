@@ -1,4 +1,4 @@
-import { Flex, Button } from "@chakra-ui/react";
+import { Flex, Button, HStack } from "@chakra-ui/react";
 import { Menu } from "./Menu";
 import { fileMenuItems } from "../consts/fileMenuItems";
 import { editMenuItems } from "../consts/editMenuItems";
@@ -20,9 +20,11 @@ export const Header = () => {
 
   return (
     <Flex as="header" height="5vh" alignItems="center">
-      <Menu category="File" items={fileMenuItems} />
-      <Menu category="Edit" items={editMenuItems} />
-      <Menu category="View" items={viewMenuItems} />
+      <HStack>
+        <Menu category="File" items={fileMenuItems} />
+        <Menu category="Edit" items={editMenuItems} />
+        <Menu category="View" items={viewMenuItems} />
+      </HStack>
       <Flex gap={2}>
         <Button onClick={handleVisibility} ml="10px">
           Info

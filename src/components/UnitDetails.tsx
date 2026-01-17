@@ -7,7 +7,11 @@ export const UnitDetails = () => {
   const unitToDisplay = units.find((unit) => unit.id === selectedUnit);
 
   if (!unitToDisplay)
-    return <Text padding="10px">Select a unit to see details.</Text>;
+    return (
+      <Text padding="10px" fontSize="2xl">
+        Select a unit to see details.
+      </Text>
+    );
 
   return (
     <Box as="div" padding="10px">
