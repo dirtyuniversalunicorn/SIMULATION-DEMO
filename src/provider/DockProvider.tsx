@@ -1,9 +1,9 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 import type { DockContextProps } from "../types/DockContextProps";
 import type { DockPosition } from "../types/DockPosition";
 
 export const DockContext = createContext<DockContextProps | undefined>(
-  undefined
+  undefined,
 );
 
 export default function DockProvider({
@@ -57,14 +57,14 @@ export default function DockProvider({
   );
 }
 
-export function useDockContext() {
-  const dockContext = useContext(DockContext);
+// export function useDockContext() {
+//   const dockContext = useContext(DockContext);
 
-  if (!dockContext) {
-    throw new Error(
-      "useDockContext must be used within the DockContext provider"
-    );
-  }
+//   if (!dockContext) {
+//     throw new Error(
+//       "useDockContext must be used within the DockContext provider"
+//     );
+//   }
 
-  return dockContext;
-}
+//   return dockContext;
+// }

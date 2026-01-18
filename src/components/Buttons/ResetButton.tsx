@@ -1,8 +1,8 @@
 import { Button } from "@chakra-ui/react";
-import { useSocketContext } from "../../provider/SocketProvider";
-import { useDockContext } from "../../provider/DockProvider";
 import { RiResetLeftLine } from "react-icons/ri";
 import type { Dispatch, SetStateAction } from "react";
+import { useSocketContext } from "../../hooks/useSocketContext";
+import { useDockContext } from "../../hooks/useDockContext";
 
 type ResetButtonProps = {
   setButtonAction: Dispatch<SetStateAction<boolean>>;
@@ -16,8 +16,10 @@ export const ResetButton = ({ setButtonAction }: ResetButtonProps) => {
     <Button
       onClick={() => {
         reset();
-        !visibility && handleVisibility();
         setButtonAction(false);
+        if (!visibility) {
+          handleVisibility();
+        }
       }}
     >
       <RiResetLeftLine />

@@ -1,15 +1,9 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, useEffect, useState, type ReactNode } from "react";
 import type { Unit } from "../types/Unit";
 import { socket } from "../lib/socket";
 import type { SimulationLog, SocketContextValue } from "../types/SocketContext";
 
-const SocketContext = createContext<SocketContextValue | null>(null);
+export const SocketContext = createContext<SocketContextValue | null>(null);
 
 export function SocketProvider({ children }: { children: ReactNode }) {
   const [units, setUnits] = useState<Unit[]>([]);
@@ -95,14 +89,14 @@ export function SocketProvider({ children }: { children: ReactNode }) {
   );
 }
 
-export function useSocketContext() {
-  const socketContext = useContext(SocketContext);
+// export function useSocketContext() {
+//   const socketContext = useContext(SocketContext);
 
-  if (!socketContext) {
-    throw new Error(
-      "useSocketContext must be used within the SocketContext provider",
-    );
-  }
+//   if (!socketContext) {
+//     throw new Error(
+//       "useSocketContext must be used within the SocketContext provider",
+//     );
+//   }
 
-  return socketContext;
-}
+//   return socketContext;
+// }

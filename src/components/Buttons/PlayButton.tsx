@@ -1,8 +1,8 @@
 import { Button } from "@chakra-ui/react";
 import { FaPauseCircle, FaPlayCircle } from "react-icons/fa";
-import { useDockContext } from "../../provider/DockProvider";
-import { useSocketContext } from "../../provider/SocketProvider";
 import type { Dispatch, SetStateAction } from "react";
+import { useSocketContext } from "../../hooks/useSocketContext";
+import { useDockContext } from "../../hooks/useDockContext";
 
 type PlayButtonProps = {
   buttonActionState: boolean;
@@ -22,8 +22,11 @@ export const PlayButton = ({
         onClick={() => {
           reloadUnits();
           play();
-          !visibility && handleVisibility();
           setButtonAction(true);
+
+          if (!visibility) {
+            handleVisibility();
+          }
         }}
       >
         <FaPlayCircle />
@@ -34,8 +37,11 @@ export const PlayButton = ({
       <Button
         onClick={() => {
           stop();
-          !visibility && handleVisibility();
           setButtonAction(false);
+
+          if (!visibility) {
+            handleVisibility();
+          }
         }}
       >
         <FaPauseCircle />

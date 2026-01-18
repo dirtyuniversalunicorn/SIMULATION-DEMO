@@ -1,7 +1,7 @@
 import { Marker, Popup, Polyline } from "react-leaflet";
 import { icons } from "../../consts/icons";
-import { useDockContext } from "../../provider/DockProvider";
 import type { MapMarkerProps } from "../../types/MapMarkerProps";
+import { useDockContext } from "../../hooks/useDockContext";
 
 export const MapMarker = ({ unit, isSelected, onSelect }: MapMarkerProps) => {
   const { visibility, handleVisibility } = useDockContext();

@@ -1,5 +1,5 @@
 import { Text } from "@chakra-ui/react";
-import { useSocketContext } from "../provider/SocketProvider";
+import { useSocketContext } from "../hooks/useSocketContext";
 
 export function Timer() {
   const { timer } = useSocketContext();

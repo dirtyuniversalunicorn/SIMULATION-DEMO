@@ -1,6 +1,6 @@
 import { Box, Text } from "@chakra-ui/react";
 import { Timer } from "./Timer";
-import { useSocketContext } from "../provider/SocketProvider";
+import { useSocketContext } from "../hooks/useSocketContext";
 
 export const Log = () => {
   const { logs } = useSocketContext();

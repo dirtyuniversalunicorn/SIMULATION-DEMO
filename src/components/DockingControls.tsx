@@ -1,11 +1,11 @@
 import { Box, Button } from "@chakra-ui/react";
-import { useDockContext } from "../provider/DockProvider";
 import {
   LuAlignEndHorizontal,
   LuAlignEndVertical,
   LuAlignStartHorizontal,
   LuAlignStartVertical,
 } from "react-icons/lu";
+import { useDockContext } from "../hooks/useDockContext";
 
 export const DockingControls = () => {
   const { handlePosition } = useDockContext();

@@ -1,5 +1,5 @@
 import { Box, Text } from "@chakra-ui/react";
-import { useSocketContext } from "../provider/SocketProvider";
+import { useSocketContext } from "../hooks/useSocketContext";
 
 export const UnitDetails = () => {
   const { units, selectedUnit } = useSocketContext();

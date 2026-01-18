@@ -1,5 +1,5 @@
 import { Button } from "@chakra-ui/react";
-import { useDockContext } from "../../provider/DockProvider";
+import { useDockContext } from "../../hooks/useDockContext";
 
 export const CloseButton = () => {
   const { handleVisibility } = useDockContext();

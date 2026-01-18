@@ -1,8 +1,8 @@
 import { Marker } from "react-leaflet";
 import { icons } from "../../consts/icons";
-import { useDockContext } from "../../provider/DockProvider";
-import { useSocketContext } from "../../provider/SocketProvider";
 import type { UnitMarkerProps } from "../../types/UnitMarkerProps";
+import { useDockContext } from "../../hooks/useDockContext";
+import { useSocketContext } from "../../hooks/useSocketContext";
 
 export const UnitMarker = ({ children, unit }: UnitMarkerProps) => {
   const { visibility, handleVisibility, measureMode, addMeasurePoint } =

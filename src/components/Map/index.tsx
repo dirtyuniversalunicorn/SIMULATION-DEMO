@@ -2,9 +2,9 @@ import { Marker, Polyline, Popup, Tooltip, useMapEvent } from "react-leaflet";
 import { MapWrapper } from "./MapWrapper";
 import { UnitMarker } from "./UnitMarker";
 import { UnitPath } from "./UnitPath";
-import { useSocketContext } from "../../provider/SocketProvider";
-import { useDockContext } from "../../provider/DockProvider";
 import L from "leaflet";
+import { useSocketContext } from "../../hooks/useSocketContext";
+import { useDockContext } from "../../hooks/useDockContext";
 
 export const Map = () => {
   const { units, selectedUnit } = useSocketContext();
@@ -22,7 +22,7 @@ export const Map = () => {
   let distance = 0;
   if (measurePoints.length === 2) {
     distance = L.latLng(measurePoints[0]).distanceTo(
-      L.latLng(measurePoints[1])
+      L.latLng(measurePoints[1]),
     );
   }
 

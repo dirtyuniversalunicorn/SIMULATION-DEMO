@@ -3,7 +3,6 @@ import { Menu } from "./Menu";
 import { fileMenuItems } from "../consts/fileMenuItems";
 import { editMenuItems } from "../consts/editMenuItems";
 import { viewMenuItems } from "../consts/viewMenuItems";
-import { useDockContext } from "../provider/DockProvider";
 import { Timer } from "./Timer";
 import { useState } from "react";
 import { TbRulerMeasure } from "react-icons/tb";
@@ -11,6 +10,7 @@ import { SocketStatus } from "./SocketStatus";
 import { PlayButton } from "./Buttons/PlayButton";
 import { ResetButton } from "./Buttons/ResetButton";
 import { useSocketStatus } from "../hooks/useSocketStatus";
+import { useDockContext } from "../hooks/useDockContext";
 
 export const Header = () => {
   const [action, setAction] = useState(false);

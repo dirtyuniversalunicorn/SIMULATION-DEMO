@@ -1,6 +1,6 @@
 import { Grid } from "@chakra-ui/react";
-import { useDockContext } from "../provider/DockProvider";
 import type { DockGridProps } from "../types/DockGridProps";
+import { useDockContext } from "../hooks/useDockContext";
 
 export const DockGrid = ({ children }: DockGridProps) => {
   const { position } = useDockContext();
