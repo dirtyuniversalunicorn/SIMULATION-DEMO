@@ -3,37 +3,29 @@ import { socket } from "../socket";
 import type { ConnectionStatus } from "../types/ConnectionStatus";
 
 export function useSocketStatus() {
-  const [status, setStatus] = useState<ConnectionStatus>("connecting");
+  const [status, setStatus] = useState<ConnectionStatus>(
+    socket.connected ? "connected" : "connecting",
+  );
 
   useEffect(() => {
-    setStatus(socket.connected ? "connected" : "connecting");
+    const onConnect = () => setStatus("connected");
+    const onDisconnect = () => setStatus("disconnected");
+    const onError = () => setStatus("error");
+    const onReconnectAttempt = () => setStatus("connecting");
+    const onReconnect = () => setStatus("connected");
 
-    socket.on("connect", () => {
-      setStatus("connected");
-    });
-
-    socket.on("disconnect", () => {
-      setStatus("disconnected");
-    });
-
-    socket.on("connect_error", () => {
-      setStatus("error");
-    });
-
-    socket.on("reconnect_attempt", () => {
-      setStatus("connecting");
-    });
-
-    socket.on("reconnect_failed", () => {
-      setStatus("error");
-    });
+    socket.on("connect", onConnect);
+    socket.on("disconnect", onDisconnect);
+    socket.on("connect_error", onError);
+    socket.io.on("reconnect_attempt", onReconnectAttempt);
+    socket.io.on("reconnect", onReconnect);
 
     return () => {
-      socket.off("connect");
-      socket.off("disconnect");
-      socket.off("connect_error");
-      socket.off("reconnect_attempt");
-      socket.off("reconnect_failed");
+      socket.off("connect", onConnect);
+      socket.off("disconnect", onDisconnect);
+      socket.off("connect_error", onError);
+      socket.io.off("reconnect_attempt", onReconnectAttempt);
+      socket.io.off("reconnect", onReconnect);
     };
   }, []);
 

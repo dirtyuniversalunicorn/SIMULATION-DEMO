@@ -1,4 +1,5 @@
 import { Spinner, VStack, Text, AbsoluteCenter, Box } from "@chakra-ui/react";
+import { SocketStatus } from "./SocketStatus";
 
 export const Loading = () => {
   return (
@@ -20,6 +21,7 @@ export const Loading = () => {
           <Text color="white" fontSize="2xl">
             Loading...
           </Text>
+          <SocketStatus />
         </VStack>
       </AbsoluteCenter>
     </Box>

@@ -10,10 +10,12 @@ import { TbRulerMeasure } from "react-icons/tb";
 import { SocketStatus } from "./SocketStatus";
 import { PlayButton } from "./Buttons/PlayButton";
 import { ResetButton } from "./Buttons/ResetButton";
+import { useSocketStatus } from "../hooks/useSocketStatus";
 
 export const Header = () => {
-  const { handleVisibility, toggleMeasureMode, measureMode } = useDockContext();
   const [action, setAction] = useState(false);
+  const { handleVisibility, toggleMeasureMode, measureMode } = useDockContext();
+  const status = useSocketStatus();
 
   return (
     <Flex as="header" height="5vh" alignItems="center">
@@ -24,17 +26,17 @@ export const Header = () => {
       </HStack>
       <Flex gap={2}>
         <Button onClick={handleVisibility} ml="10px">
-          Info
+          Info panel
         </Button>
         <PlayButton buttonActionState={action} setButtonAction={setAction} />
         <ResetButton setButtonAction={setAction} />
-        <Timer />
         <Button onClick={toggleMeasureMode}>
           {measureMode ? "Exit Measure Mode" : "Measure Distance"}{" "}
           <TbRulerMeasure />
         </Button>
+        <Timer />
       </Flex>
-      <SocketStatus />
+      {status !== "error" && <SocketStatus />}
     </Flex>
   );
 };
