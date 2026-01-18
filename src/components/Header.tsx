@@ -36,7 +36,7 @@ export const Header = () => {
         </Button>
         <Timer />
       </Flex>
-      {status !== "error" && <SocketStatus />}
+      {status === "connected" && <SocketStatus />}
     </Flex>
   );
 };
