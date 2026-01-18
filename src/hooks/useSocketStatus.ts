@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { socket } from "../socket";
+import { socket } from "../lib/socket";
 import type { ConnectionStatus } from "../types/ConnectionStatus";
 
 export function useSocketStatus() {

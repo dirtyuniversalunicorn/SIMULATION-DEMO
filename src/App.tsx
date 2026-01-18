@@ -11,7 +11,6 @@ import { useSocketStatus } from "./hooks/useSocketStatus";
 import { Loading } from "./components/Loading";
 
 function App() {
-  console.log("Whole app being reloaded!");
   const status = useSocketStatus();
   return (
     <Box as="section" height="100vh">

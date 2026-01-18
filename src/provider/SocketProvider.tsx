@@ -6,7 +6,7 @@ import {
   type ReactNode,
 } from "react";
 import type { Unit } from "../types/Unit";
-import { socket } from "../socket";
+import { socket } from "../lib/socket";
 import type { SimulationLog, SocketContextValue } from "../types/SocketContext";
 
 const SocketContext = createContext<SocketContextValue | null>(null);
@@ -54,10 +54,10 @@ export function SocketProvider({ children }: { children: ReactNode }) {
       }) => {
         setUnits((prev) =>
           prev.map((u) =>
-            u.id === id ? { ...u, positionLat, positionLng } : u
-          )
+            u.id === id ? { ...u, positionLat, positionLng } : u,
+          ),
         );
-      }
+      },
     );
 
     return () => {
@@ -100,7 +100,7 @@ export function useSocketContext() {
 
   if (!socketContext) {
     throw new Error(
-      "useSocketContext must be used within the SocketContext provider"
+      "useSocketContext must be used within the SocketContext provider",
     );
   }
 
