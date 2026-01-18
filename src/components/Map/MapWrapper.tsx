@@ -5,7 +5,7 @@ export const MapWrapper = ({ children }: MapWrapperProps) => {
   return (
     <MapContainer
       center={[49.5939, 17.2508]}
-      zoom={7}
+      zoom={12}
       scrollWheelZoom={true}
       style={{ height: "95vh", width: "100%" }}
     >
